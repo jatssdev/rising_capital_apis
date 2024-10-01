@@ -3,6 +3,7 @@
 
 // Include the controller file
 require_once 'app/controllers/UserController.php';
+require_once 'app/controllers/JobApplicationController.php';
 require_once 'app/controllers/JobController.php';
 require_once 'app/middleware/AuthMiddleware.php';
 
@@ -39,6 +40,13 @@ if ($requestUri === 'api/job/create' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     AuthMiddleware::check(); // Ensure the user is authenticated
     $controller = new JobController();
     $controller->getAllJobs();
+} elseif ($requestUri === 'api/job/apply' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    $controller = new JobApplicationController();
+    $controller->applyForJob();
+} elseif ($requestUri === 'api/job/applications' && $_SERVER['REQUEST_METHOD'] === 'GET') {
+    AuthMiddleware::check(); // Ensure the user is authenticated
+    $controller = new JobApplicationController();
+    $controller->getAllApplications();
 }
 // 404 handler for all undefined routes
 else {
