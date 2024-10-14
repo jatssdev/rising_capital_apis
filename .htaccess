@@ -2,7 +2,7 @@
     RewriteEngine On
 
     # RewriteBase should match the subdirectory where your project is hosted (e.g., /rising/)
-    RewriteBase /rising/
+    RewriteBase /jatssdev/
 
     # Redirect all requests to index.php
     RewriteCond %{REQUEST_FILENAME} !-f

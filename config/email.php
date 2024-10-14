@@ -60,7 +60,6 @@ function sendApplicationEmail($application_id, $job_id, $name, $email, $phone)
     $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-Type: text/html; charset=UTF-8" . "\r\n";
     $headers .= "From: no-reply@yourdomain.com" . "\r\n";
-
     // Send the email
     mail($to, $subject, $message, $headers);
 }

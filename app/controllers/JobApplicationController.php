@@ -7,27 +7,23 @@ require_once 'config/email.php'; // For sending email
 class JobApplicationController
 {
     private $applicationModel;
-
     public function __construct()
     {
         global $mysqli;
         $this->applicationModel = new Application($mysqli);
     }
-
     public function applyForJob()
     {
         $data = json_decode(file_get_contents('php://input'), true);
 
         // Validate required fields
         if (isset($data['job_id']) && isset($data['name']) && isset($data['email']) && isset($data['phone'])) {
-            $job_id = $data['job_id'];
+            $job_id = $data['course_id'];
             $name = $data['name'];
             $email = $data['email'];
             $phone = $data['phone'];
-
             // Store application details in the database
             $application_id = $this->applicationModel->createApplication($job_id, $name, $email, $phone);
-
             if ($application_id) {
                 // Send email notification to admin
                 sendApplicationEmail($application_id, $job_id, $name, $email, $phone);
